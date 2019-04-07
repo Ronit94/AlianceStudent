@@ -1,0 +1,56 @@
+<form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()">
+  <nz-form-item>
+    <nz-form-control>
+      <nz-input-group [nzPrefix]="prefixUser">
+        <input type="text" nz-input formControlName="registrationID" placeholder="Registration ID" />
+      </nz-input-group>
+      <nz-form-explain *ngIf="validateForm.get('registrationID')?.dirty && validateForm.get('registrationID')?.errors">
+        Registration ID is required!</nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-control>
+      <nz-input-group [nzPrefix]="prefixLock" [nzSuffix]="suffixTemplate">
+        <input [type]="passwordVisible ? 'text' : 'password'" nz-input formControlName="password"
+          placeholder="Password" />
+      </nz-input-group>
+      <ng-template #suffixTemplate>
+        <i nz-icon [nzType]="passwordVisible ? 'eye-invisible' : 'eye'"
+          (click)="passwordVisible = !passwordVisible"></i>
+      </ng-template>
+
+      <nz-form-explain *ngIf="validateForm.get('password')?.dirty && validateForm.get('password')?.errors">Please input
+        your Password!</nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-control>
+      <nz-select class="college-name" nzAllowClear nzPlaceHolder="Select a college" formControlName="collegeName">
+        <nz-option *ngFor="let o of colleges" [nzValue]="o" [nzLabel]="o"></nz-option>
+      </nz-select>
+      <nz-form-explain *ngIf="validateForm.get('collegeName')?.dirty && validateForm.get('collegeName')?.errors">Please
+        input
+        your college name!</nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-control>
+      <nz-select class="college-state" nzAllowClear nzPlaceHolder="Select a state" formControlName="stateName">
+        <nz-option *ngFor="let state of states" [nzLabel]="state" [nzValue]="state"></nz-option>
+      </nz-select>
+      <nz-form-explain *ngIf="validateForm.get('stateName')?.dirty && validateForm.get('stateName')?.errors">
+        Please input
+        your college state!</nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-control>
+      <label nz-checkbox formControlName="remember">
+        <span>Remember me</span>
+      </label>
+      <button nz-button class="login-form-button" [nzType]="'primary'">Log in</button>
+    </nz-form-control>
+  </nz-form-item>
+</form>
+<ng-template #prefixUser><i nz-icon type="user"></i></ng-template>
+<ng-template #prefixLock><i nz-icon type="lock"></i></ng-template>
