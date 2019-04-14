@@ -7,11 +7,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CommonServiceService } from './providers/common-service.service'
 import { httpInterceptorProviders } from './providers/interceptors/index'
-import { JwtModule } from '@auth0/angular-jwt'
 
 import { HttpClientModule } from '@angular/common/http';
-import { HttpModule } from '@angular/http'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { StoreModule } from '@ngrx/store';
+import { reducers, metaReducers } from './reducers';
 
 
 
@@ -25,9 +25,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     LoadingBarRouterModule,
     NgxSpinnerModule,
     HttpClientModule,
-    HttpModule,
-    JwtModule.forRoot({}),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    StoreModule.forRoot(reducers, { metaReducers })
   ],
   providers: [CommonServiceService, httpInterceptorProviders],
   bootstrap: [AppComponent]

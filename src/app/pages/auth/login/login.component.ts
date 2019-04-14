@@ -55,6 +55,7 @@ export class LoginComponent implements OnInit {
         } else if (res.responseCode === 200) {
           this.auth.setToken(res.responseData.authToken).subscribe((token) => {
             if (token) {
+              this.auth.setUserData(res.responseData)
               this.router.navigate(['pages/dashboard/profile'])
             } else if (token instanceof Error) {
               this.msg.error('Token cant saved')

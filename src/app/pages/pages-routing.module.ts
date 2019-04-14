@@ -27,11 +27,11 @@ const routes: Routes = [
         component: LoginComponent
       }, {
         path: 'register',
-        canActivate: [CanActivateGuard],
+        // canActivate: [CanActivateGuard],
         component: RegisterComponent
       }, {
         path: 'forgot-password',
-        canActivate: [CanActivateGuard],
+        //canActivate: [CanActivateGuard],
         component: ForgotPasswordComponent
       }
     ]

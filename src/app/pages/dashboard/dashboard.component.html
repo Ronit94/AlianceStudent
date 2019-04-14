@@ -1,24 +1,22 @@
 <nz-layout class="dashboardLayout">
   <nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed" [nzTrigger]="triggerTemplate">
-    <div class="logo"></div>
+    <div class="logo">
+    </div>
     <ul nz-menu [nzTheme]="'dark'" [nzMode]="'inline'" [nzInlineCollapsed]="isCollapsed">
       <li nz-submenu>
-        <span title><i nz-icon type="user"></i><span class="nav-text">User</span></span>
+        <span title><i nz-icon type="user"></i><span class="nav-text">Account</span></span>
         <ul>
-          <li nz-menu-item>Tom</li>
-          <li nz-menu-item>Bill</li>
-          <li nz-menu-item>Alex</li>
+          <li nz-menu-item>Profile</li>
+          <li nz-menu-item>settings</li>
         </ul>
       </li>
       <li nz-submenu>
-        <span title><i nz-icon type="team"></i><span class="nav-text">Team</span></span>
+        <span title><i nz-icon type="team"></i><span class="nav-text">College</span></span>
         <ul>
-          <li nz-menu-item>Team 1</li>
-          <li nz-menu-item>Team 2</li>
+          <li nz-menu-item>Semester info</li>
+          <li nz-menu-item>Books Section</li>
+          <li nz-menu-item>Fees Section</li>
         </ul>
-      </li>
-      <li nz-menu-item>
-        <span><i nz-icon type="file"></i><span class="nav-text">File</span></span>
       </li>
     </ul>
   </nz-sider>
@@ -26,6 +24,22 @@
     <nz-header style="background: #fff; padding:0;">
       <i class="trigger" nz-icon [type]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
         (click)="isCollapsed = !isCollapsed"></i>
+      <div class="header-right">
+        <span class="Header-portion">
+          <nz-badge nzDot><i nz-icon type="bell" theme="outline"></i></nz-badge>
+        </span>
+        <nz-dropdown [nzPlacement]="'bottomRight'">
+          <nz-avatar nz-dropdown nzIcon="anticon anticon-user" nzSrc="{{imageURL}}"></nz-avatar>
+          <ul nz-menu>
+            <li nz-menu-item routerLink="profile">
+              <a><i nz-icon type="profile" theme="outline"></i> Account Profile</a>
+            </li>
+            <li nz-menu-divider></li>
+            <li nz-menu-item (click)="Logout()"><i nz-icon type="logout" theme="outline"></i> Logout</li>
+          </ul>
+        </nz-dropdown>
+      </div>
+
     </nz-header>
     <nz-content style="margin:0 16px;">
       <nz-breadcrumb style="margin:16px 0;">

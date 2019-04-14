@@ -24,7 +24,6 @@ export class AuthComponent implements OnInit {
 
   URLClick(param: String) {
     this.currentURL = param
-    console.log('this', this.currentURL)
   }
 
 }

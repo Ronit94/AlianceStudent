@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment'
-import { Http, RequestOptions, Headers } from '@angular/http'
+import { HttpClient } from '@angular/common/http'
 import { Observable, of } from 'rxjs';
 import { map, tap, catchError, debounceTime } from 'rxjs/operators'
 import { APIResponse } from '../models/APIModel'
@@ -10,47 +10,40 @@ import { APIResponse } from '../models/APIModel'
 export class CommonServiceService {
 
   constructor(
-    private http: Http
+    private http: HttpClient
   ) { }
 
   commonPostHttpService(Url: String, Obj: Object, operation: any): Observable<APIResponse> {
 
-    let [headers, ApIUrl] = [new Headers({}), (environment.Server_URL + Url)]
-
-    let requestOptions = new RequestOptions({ headers: headers })
-
-
-    return this.http.post(ApIUrl, Obj, requestOptions).pipe(
-      // catchError(this.handleError<any>(operation, {})),
-      map(res => <APIResponse>res.json())
+    let ApIUrl = (environment.Server_URL + Url)
+    return this.http.post(ApIUrl, Obj).pipe(
+      catchError(this.handleError<any>(operation, {})),
+      map(res => <APIResponse>res)
     )
   }
 
 
   commonGetHttpService(Url: String, operation: any): Observable<APIResponse> {
-    let [headers, ApIUrl] = [new Headers({}), (environment.Server_URL + Url)]
-    let requestOptions = new RequestOptions({ headers: headers })
-    return this.http.get(ApIUrl, requestOptions).pipe(
-      // catchError(this.handleError<any>(operation, {})),
-      map(res => <APIResponse>res.json())
+    let ApIUrl = (environment.Server_URL + Url)
+    return this.http.get(ApIUrl).pipe(
+      catchError(this.handleError<any>(operation, {})),
+      map(res => <APIResponse>res)
     )
   }
 
   commonPutHttpService(Url: String, obj: Object, operation: any): Observable<APIResponse> {
-    let [headers, ApIUrl] = [new Headers({}), (environment.Server_URL + Url)]
-    let requestOptions = new RequestOptions({ headers: headers })
-    return this.http.put(ApIUrl, obj, requestOptions).pipe(
-      // catchError(this.handleError<any>(operation, {})),
-      map(res => <APIResponse>res.json())
+    let ApIUrl = (environment.Server_URL + Url)
+    return this.http.put(ApIUrl, obj).pipe(
+      catchError(this.handleError<any>(operation, {})),
+      map(res => <APIResponse>res)
     )
   }
 
   commonDeleteHttpService(Url: String, obj: Object, operation: any): Observable<APIResponse> {
-    let [headers, ApIUrl] = [new Headers({}), (environment.Server_URL + Url)]
-    let requestOptions = new RequestOptions({ headers: headers })
-    return this.http.delete(ApIUrl, requestOptions).pipe(
-      //catchError(this.handleError<any>(operation, {})),
-      map(res => <APIResponse>res.json())
+    let ApIUrl = (environment.Server_URL + Url)
+    return this.http.delete(ApIUrl).pipe(
+      catchError(this.handleError<any>(operation, {})),
+      map(res => <APIResponse>res)
     )
   }
 
