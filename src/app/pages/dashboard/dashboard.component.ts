@@ -15,6 +15,7 @@ export class DashboardComponent implements OnInit {
   @ViewChild('trigger') customTrigger: TemplateRef<void>;
   public userData$: Observable<user[]>;
   public imageURL: any;
+  public routerMapping: Array<any> = []
 
   /** custom trigger can be TemplateRef **/
 
@@ -24,13 +25,17 @@ export class DashboardComponent implements OnInit {
     private commonService: CommonServiceService
   ) {
     this.userData$ = this.auth.userData
+    this.routerMapping = this.router.url.split('/').filter(ele => { return ele != '' })
+
   }
 
   ngOnInit() {
     this.auth.getToken().subscribe((res) => {
       this.commonService.commonGetHttpService('students/fetch-student-data', 'Fetch Students data').subscribe((res) => {
-        this.imageURL = res.responseData.profilePic
-        this.auth.setUserData(res.responseData)
+        if (res.responseCode === 200) {
+          this.imageURL = res.responseData.profilePic
+          this.auth.setUserData(res.responseData)
+        }
       })
     })
   }
@@ -44,7 +49,6 @@ export class DashboardComponent implements OnInit {
       this.router.navigate(['pages/auth/login'])
     })
   }
-
 
 
 

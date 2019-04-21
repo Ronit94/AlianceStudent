@@ -1,3 +1,55 @@
-<p>
-  profile works!
-</p>
+<div nz-row nzGutter="24" class="py-lg">
+  <div nz-col nzMd="24" nzLg="7">
+    <nz-card [nzBordered]="false" class="mb-lg" [nzLoading]="!userData">
+      <ng-container *ngIf="userData">
+        <div class="avatarHolder">
+          <img [src]="userData.profilepic ?userData.profilepic:'assets/images/profile.png'">
+          <div class="name">{{userData.StudentName}}</div>
+          <div>{{userData.RegistrationID}}</div>
+        </div>
+        <div class="detail">
+          <p class="auto-resize"><i class="title"></i>{{userData.College_Name }}</p>
+          <p class="auto-resize"><i class="group"></i>{{userData.group}}</p>
+          <p class="auto-resize">
+            <i class="address"></i>
+            {{userData.StudentAddress}}
+          </p>
+        </div>
+        <nz-divider nzDashed></nz-divider>
+        <div class="team">
+          <div class="teamTitle">Technical Qualification</div>
+          <nz-spin [nzSpinning]="true">
+            <div nz-row nzGutter="36">
+              <!-- <div nz-col *ngFor="let t of notice" nzLg="24" nzXl="12">
+                <a href="#" class="text-truncate">
+                  <nz-avatar [nzSrc]="t.logo" nzSize="small"></nz-avatar>
+                  {{t.member}}
+                </a>
+              </div> -->
+            </div>
+          </nz-spin>
+        </div>
+        <nz-divider nzDashed></nz-divider>
+        <div class="tags">
+          <div class="tagsTitle">Skills</div>
+          <!-- <nz-tag *ngFor="let t of user.tags">{{t.label}}</nz-tag>
+          <nz-tag *ngIf="!taging" (click)="tagShowIpt()" class="ant-tag__plus">
+            <i nz-icon type="plus"></i>
+          </nz-tag>
+          <input *ngIf="taging" #tagInput nz-input [(ngModel)]="tagValue" (blur)="tagBlur()"
+            (keydown)="tagEnter($event)" nzSize="small" type="text" style="width: 78px"> -->
+        </div>
+      </ng-container>
+    </nz-card>
+  </div>
+  <div nz-col nzMd="24" nzLg="17">
+    <nz-card class="tabsCard" [nzBordered]="false" [nzTitle]="tagTitleTpl">
+      <!-- <ng-template #tagTitleTpl>
+        <nz-tabset nzSize="large" [nzSelectedIndex]="pos">
+          <nz-tab *ngFor="let i of tabs" [nzTitle]="i.tab" (nzClick)="to(i)"></nz-tab>
+        </nz-tabset>
+      </ng-template> -->
+      <router-outlet></router-outlet>
+    </nz-card>
+  </div>
+</div>

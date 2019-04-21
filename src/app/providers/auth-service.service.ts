@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { LocalStorage } from '@ngx-pwa/local-storage'
 import { Observable, of } from 'rxjs';
-import { BehaviorSubject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { delay, tap } from 'rxjs/operators'
 import { user } from '../models/userModels';
 @Injectable({
@@ -10,7 +10,8 @@ import { user } from '../models/userModels';
 export class AuthServiceService {
 
   public login: boolean = false
-  private userSource: BehaviorSubject<user[]> = new BehaviorSubject([]);
+  private userDataSource = new Subject<any>();
+  userData$ = this.userDataSource.asObservable();
 
   constructor(
     protected localstorage: LocalStorage
@@ -57,9 +58,9 @@ export class AuthServiceService {
   }
 
   setUserData(userlist: any): void {
-    this.userSource.next(userlist);
+    this.userDataSource.next(userlist);
   }
-  get userData(): BehaviorSubject<user[]> {
-    return this.userSource;
+  get userData(): Subject<any> {
+    return this.userDataSource;
   }
 }

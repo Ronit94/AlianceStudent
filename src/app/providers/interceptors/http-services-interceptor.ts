@@ -23,11 +23,14 @@ export class HttpServicesInterceptor implements HttpInterceptor {
                 headers: request.headers.set('access-token', localStorage.getItem('authToken'))
             })
         }
-
-
         return next.handle(request).pipe(tap((event: HttpEvent<any>) => {
             if (event instanceof HttpResponse) {
-                this.spinnerService.hide()
+                if (event.body.statusCode === 403) {
+                    localStorage.clear();
+                    this.router.navigate(['pages/auth/login'])
+                } else {
+                    this.spinnerService.hide()
+                }
             }
         },
             (err: any) => {
