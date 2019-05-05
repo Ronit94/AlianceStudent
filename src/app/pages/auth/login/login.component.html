@@ -2,10 +2,10 @@
   <nz-form-item>
     <nz-form-control>
       <nz-input-group [nzPrefix]="prefixUser">
-        <input type="text" nz-input formControlName="registrationID" placeholder="Registration ID" />
+        <input type="text" nz-input formControlName="AdminID" placeholder="Admin ID" />
       </nz-input-group>
-      <nz-form-explain *ngIf="validateForm.get('registrationID')?.dirty && validateForm.get('registrationID')?.errors">
-        Registration ID is required!</nz-form-explain>
+      <nz-form-explain *ngIf="validateForm.get('AdminID')?.dirty && validateForm.get('AdminID')?.errors">
+        Admin ID is required!</nz-form-explain>
     </nz-form-control>
   </nz-form-item>
   <nz-form-item>

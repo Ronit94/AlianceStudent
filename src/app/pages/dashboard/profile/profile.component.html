@@ -5,51 +5,71 @@
         <div class="avatarHolder">
           <img [src]="userData.profilepic ?userData.profilepic:'assets/images/profile.png'">
           <div class="name">{{userData.StudentName}}</div>
-          <div>{{userData.RegistrationID}}</div>
+          <div>{{userData.RegistrationID}} <i nz-icon nzType="edit" nzTheme="outline"></i></div>
         </div>
         <div class="detail">
-          <p class="auto-resize"><i class="title"></i>{{userData.College_Name }}</p>
-          <p class="auto-resize"><i class="group"></i>{{userData.group}}</p>
-          <p class="auto-resize">
-            <i class="address"></i>
-            {{userData.StudentAddress}}
-          </p>
+          <nz-spin [nzSpinning]="floating">
+            <p class="auto-resize"><i class="title"></i>{{userData.College_Name }}</p>
+            <p class="auto-resize">
+              <i class="address"></i>
+              {{userData.StudentAddress}}
+            </p>
+          </nz-spin>
         </div>
         <nz-divider nzDashed></nz-divider>
-        <div class="team">
-          <div class="teamTitle">Technical Qualification</div>
-          <nz-spin [nzSpinning]="true">
-            <div nz-row nzGutter="36">
-              <!-- <div nz-col *ngFor="let t of notice" nzLg="24" nzXl="12">
-                <a href="#" class="text-truncate">
-                  <nz-avatar [nzSrc]="t.logo" nzSize="small"></nz-avatar>
-                  {{t.member}}
-                </a>
-              </div> -->
+        <div class="avatarHolder">
+          <div class="teamTitle">Technical Qualification <i nz-icon nzType="edit" nzTheme="outline"></i>
+          </div>
+          <nz-spin [nzSpinning]="floating">
+            <div nz-row nzGutter="36" *ngIf="userData.students_Technical_info">
+              <p class="auto-resize"><i class="group"></i>{{userData.students_Technical_info.CompanyName}} </p>
+              <p class="auto-resize"><i nz-icon nzType="profile" nzTheme="outline"></i>
+                {{userData.students_Technical_info.Designation}} </p>
             </div>
           </nz-spin>
         </div>
         <nz-divider nzDashed></nz-divider>
         <div class="tags">
           <div class="tagsTitle">Skills</div>
-          <!-- <nz-tag *ngFor="let t of user.tags">{{t.label}}</nz-tag>
-          <nz-tag *ngIf="!taging" (click)="tagShowIpt()" class="ant-tag__plus">
-            <i nz-icon type="plus"></i>
+          <nz-tag *ngFor="let tag of tags; let i = index" [nzMode]="i === 0 ? 'default' : 'closeable'"
+            (nzAfterClose)="handleClose(tag)">
+            {{ sliceTagName(tag) }}
           </nz-tag>
-          <input *ngIf="taging" #tagInput nz-input [(ngModel)]="tagValue" (blur)="tagBlur()"
-            (keydown)="tagEnter($event)" nzSize="small" type="text" style="width: 78px"> -->
+          <nz-tag *ngIf="!inputVisible" class="editable-tag" nzNoAnimation (click)="showInput()">
+            <i nz-icon type="plus"></i> New Tag
+          </nz-tag>
+          <input #inputElement nz-input nzSize="small" *ngIf="inputVisible" type="text" [(ngModel)]="inputValue"
+            style="width: 78px;" (blur)="handleInputConfirm()" (keydown.enter)="handleInputConfirm()" />
+        </div>
+        <nz-divider nzDashed></nz-divider>
+        <div class="tags">
+
         </div>
       </ng-container>
     </nz-card>
   </div>
   <div nz-col nzMd="24" nzLg="17">
     <nz-card class="tabsCard" [nzBordered]="false" [nzTitle]="tagTitleTpl">
-      <!-- <ng-template #tagTitleTpl>
+      <ng-template #tagTitleTpl>
         <nz-tabset nzSize="large" [nzSelectedIndex]="pos">
-          <nz-tab *ngFor="let i of tabs" [nzTitle]="i.tab" (nzClick)="to(i)"></nz-tab>
+          <nz-tab nzTitle="Task List">
+
+          </nz-tab>
+          <nz-tab nzTitle="Statistics">
+            <nz-row [nzGutter]="16">
+              <nz-col [nzSpan]="12">
+                <nz-statistic [nzValue]="1949101 | number" [nzTitle]="'Active Users'"></nz-statistic>
+              </nz-col>
+              <nz-col [nzSpan]="12">
+                <nz-statistic [nzValue]="2019.111 | number: '1.0-2'" [nzTitle]="'Account Balance (CNY)'"></nz-statistic>
+              </nz-col>
+            </nz-row>
+          </nz-tab>
+          <nz-tab nzTitle="Time">
+
+          </nz-tab>
         </nz-tabset>
-      </ng-template> -->
-      <router-outlet></router-outlet>
+      </ng-template>
     </nz-card>
   </div>
 </div>

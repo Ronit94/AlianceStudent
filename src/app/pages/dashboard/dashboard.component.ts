@@ -31,7 +31,7 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     this.auth.getToken().subscribe((res) => {
-      this.commonService.commonGetHttpService('students/fetch-student-data', 'Fetch Students data').subscribe((res) => {
+      this.commonService.commonGetHttpService('admin/fetch-admin-data', 'Fetch Admin data').subscribe((res) => {
         if (res.responseCode === 200) {
           this.imageURL = res.responseData.profilePic
           this.auth.setUserData(res.responseData)

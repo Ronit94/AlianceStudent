@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { NgZorroAntdModule, NZ_I18N, en_US } from 'ng-zorro-antd';
 import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
-import { ReactiveFormsModule } from '@angular/forms'
+import { ReactiveFormsModule, FormsModule } from '@angular/forms'
 registerLocaleData(en);
 
 
@@ -24,8 +24,9 @@ import { ProfileComponent } from './dashboard/profile/profile.component';
     CommonModule,
     PagesRoutingModule,
     ReactiveFormsModule,
+    FormsModule,
     NgZorroAntdModule
   ],
-  providers: [{ provide: NZ_I18N, useValue: en_US }]
+  providers: []
 })
 export class PagesModule { }

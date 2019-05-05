@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.validateForm = this.fb.group({
-      registrationID: [null, [Validators.required]],
+      AdminID: [null, [Validators.required]],
       password: [null, [Validators.required]],
       collegeName: [null, [Validators.required]],
       stateName: [null, [Validators.required]],
@@ -45,7 +45,7 @@ export class LoginComponent implements OnInit {
         this.validateForm.controls[i].updateValueAndValidity();
       }
     } else {
-      this.commonService.commonPostHttpService('students/student-login', this.validateForm.value, 'student Login').subscribe((res) => {
+      this.commonService.commonPostHttpService('admin/login', this.validateForm.value, 'Admin Login').subscribe((res) => {
         if (res.responseCode === 404) {
           this.msg.warning(`${res.responseText}`)
         } else if (res.responseCode === 500) {
