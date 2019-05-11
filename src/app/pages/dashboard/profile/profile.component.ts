@@ -9,6 +9,7 @@ import { Observable } from 'rxjs';
 })
 export class ProfileComponent implements OnInit {
   public userData: any;
+  tagTitleTpl:any='Hello'
   constructor(
     private auth: AuthServiceService
   ) { }
