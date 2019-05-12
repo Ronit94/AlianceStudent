@@ -43,6 +43,9 @@ MIT
 @angular/router
 MIT
 
+@angular/service-worker
+MIT
+
 @ant-design/icons-angular
 MIT
 
