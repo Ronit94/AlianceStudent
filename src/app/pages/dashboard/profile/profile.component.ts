@@ -9,11 +9,7 @@ import { Observable } from 'rxjs';
 })
 export class ProfileComponent implements OnInit {
   public userData: any;
-  public floating: boolean = true;
-  public tags = [];
-  inputVisible = false;
-  inputValue = '';
-  @ViewChild('inputElement') inputElement: ElementRef;
+  tagTitleTpl:any='Hello'
   constructor(
     private auth: AuthServiceService
   ) { }
